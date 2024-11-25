@@ -13,7 +13,7 @@ Error handling for various scenarios
 clone Repository on the gitup link - git clone **https://github.com/MohanrajV15/Block_Management**
 open the file on VS Code or any other platform(we need node in this platform)
 run npm install or ipm i
-run node app or app.js
+run node app or nodemon app
 the server is listing on port 3000 - **http://localhost:3000**
 api heath check end point is **api/heanth**  
 user model endpoint is **api/user**

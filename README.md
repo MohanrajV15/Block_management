@@ -19,3 +19,12 @@ api heath check end point is **api/heanth**
 user model endpoint is **api/user**
 post model endpoint is **api/post**
 comment model endpoind is **api/comment**
+
+# Data connection
+install MY SQL workbench 8.0
+create ROOT Account and User Account
+chnage the .evv file content
+         DB_User  on Your DB_Name,
+         DB_Passwod on Your DB_Passoword
+
+

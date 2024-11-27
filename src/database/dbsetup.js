@@ -1,7 +1,8 @@
-const db = require('./db'); // Import the database configuration
+const db = require("./db")
 
 async function DatabaseAndTables() {
   try {
+    
     await db.query(`CREATE DATABASE IF NOT EXISTS blog_system`);
     await db.query(`USE blog_system`);
 
@@ -38,11 +39,11 @@ async function DatabaseAndTables() {
       FOREIGN KEY (user_id) REFERENCES users(id) )`
     );
     console.log('Database and tables created successfully!');
-  } catch (error) {
-    console.error('Error setting up the database:', error.message);
+  } catch (err) {
+    console.error('Error setting up the database:', err.message);
   } 
 };
 
-module.exports = {DatabaseAndTables};
+module.exports = DatabaseAndTables;
 
 

@@ -14,7 +14,7 @@ clone Repository on the gitup link - git clone **https://github.com/MohanrajV15/
 open the file on VS Code or any other platform(we need node in this platform)
 run npm install or ipm i
 run node app or nodemon app
-the server is listing on port 3000 - **http://localhost:3000**
+the server is listing on port 4000 for development server- **http://localhost:4000**
 api heath check end point is **api/heanth**  
 user model endpoint is **api/user**
 post model endpoint is **api/post**

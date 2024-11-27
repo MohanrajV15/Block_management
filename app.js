@@ -1,27 +1,39 @@
-require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
-const {DatabaseAndTables} = require('./config/tables');
-
-const user = require('./router/userRouter');
-const post = require('./router/postRouter');
-const comment = require('./router/commentRouter');
-
-
-
 const app = express();
+
+const errorHandler = require('./src/middleware/error');
+const DatabaseAndTables = require('./src/database/dbsetup');
 DatabaseAndTables();
 
-app.use(bodyParser.json());
 
+
+const dotenv = require('dotenv');
+dotenv.config({path:"../src/config/config.env"});
+
+const allRouter = require('./src/router/index');
+app.use(express.json());
 app.use('/api/health',(req,res) => {
   res.send('health check ok....');
 })
-app.use('/api/user', user);
-app.use('/api/post', post);
-app.use('/api/comment', comment);
+
+const db = require("./src/database/db");
+console.log(typeof db.execute);
+
+
+app.use('/api', allRouter);
+
+app.use(errorHandler)
+
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+
+const server = app.listen(
+  PORT,
+  console.log(`server runing in ${process.env.NODE_ENV} mode on port ${PORT}`)
+);
+
+process.on("unhandledRejection", (err, promise) => {
+  console.log(`Error : ${err.message}`);
+  // close server and exit process
+  server.close(() => process.exit(1));
 });

@@ -1,15 +1,16 @@
-const db = require('../config/db'); 
+const db = require('../database/db'); 
 
-  createComment = async ({ postId, userId, commentText }) => {
+const commentModel = {
+  async createComment({ postId, userId, commentText }) {
     const query = `
-      INSERT INTO comments (post_id, user_id, comment_text)
+      INSERT INTO comments (post_id, user_id, comment_text) 
       VALUES (?, ?, ?)
     `;
-    return db.execute(query, [postId, userId, commentText]);
+    const [result] = await db.execute(query, [postId, userId, commentText]);
+    return result.insertId; 
   },
 
-
-  getCommentsByPostId = async (postId) => {
+  async getCommentsByPostId(postId) {
     const query = `
       SELECT 
         comments.id, 
@@ -23,9 +24,8 @@ const db = require('../config/db');
     `;
     const [rows] = await db.execute(query, [postId]);
     return rows;
-  };
+  }
+};
 
-module.exports = {
-    createComment,
-    getCommentsByPostId
-}
+module.exports = commentModel;
+
